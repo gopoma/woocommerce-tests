@@ -17,5 +17,11 @@ npx playwright test --headed --project=chromium && npx playwright show-report
 ```
 
 ```bash
-npx playwright test tests/example.spec.js --headed --project=chromium && npx playwright show-report
+npx playwright test tests/prueba.test.js --headed --project=chromium && npx playwright show-report
 ```
+
+```bash
+npx playwright test tests/prueba.test.js --headed --project=chromium
+```
+
+Consulta `test-results` para los videos, verificar que `playwright.config.js` tiene habilitado la grabación.
