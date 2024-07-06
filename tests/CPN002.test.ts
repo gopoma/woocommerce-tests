@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('CPN001', async ({ page }) => {
+test('CPN002', async ({ page }) => {
     test.setTimeout(120000);
 
     await page.goto('https://francocardenas.me/wp-login.php?redirect_to=https%3A%2F%2Ffrancocardenas.me%2Fwp-admin%2F&reauth=1');
@@ -10,22 +10,24 @@ test('CPN001', async ({ page }) => {
     await page.getByRole('button', { name: 'Log In' }).click();
     await page.locator('#menu-posts-product').getByRole('link', { name: 'Products', exact: true }).click();
     await page.getByLabel('Main menu', { exact: true }).getByRole('link', { name: 'Add New', exact: true }).click();
-    await page.getByLabel('Product name').fill('Casaca');
-    await page.frameLocator('#content_ifr').locator('#tinymce').fill('Hermosa casaca hecha de telas finas, de buena calidad, fácil de lavar y duradera');
+    await page.getByLabel('Product name').click();
+    await page.getByLabel('Product name').fill('Polo');
+    await page.frameLocator('#content_ifr').getByRole('paragraph').click();
+    await page.frameLocator('#content_ifr').locator('#tinymce').fill('Polo Juvenil hecho de algodón, de buena calidad, fácil de lavar y duradero');
+
+    await page.getByLabel('Virtual:').check();
     await page.getByLabel('Regular price (S/)').click();
-    await page.getByLabel('Regular price (S/)').fill('80.00');
+    await page.getByLabel('Regular price (S/)').fill('50.00');
     await page.getByLabel('Sale price (S/)').click();
-    await page.getByLabel('Sale price (S/)').fill('70.00');
+    await page.getByLabel('Sale price (S/)').fill('40.00');
+    await page.getByRole('link', { name: 'Schedule', exact: true }).click();
+    await page.getByPlaceholder('From… YYYY-MM-DD').click();
+    await page.getByPlaceholder('From… YYYY-MM-DD').fill('2024-07-08');
+    await page.getByPlaceholder('To…  YYYY-MM-DD').click();
+    await page.getByPlaceholder('To…  YYYY-MM-DD').fill('2024-08-31');
     await page.getByRole('link', { name: 'Inventory' }).click();
     await page.getByLabel('SKU', { exact: true }).click();
-    await page.getByLabel('SKU', { exact: true }).fill('CAS-ALT-FIN-1');
-    await page.getByLabel('Stock management').check();
-    await page.getByLabel('Quantity', { exact: true }).click();
-    await page.getByLabel('Quantity', { exact: true }).fill('50');
-    await page.getByPlaceholder('Store-wide threshold (2)').click();
-    await page.getByPlaceholder('Store-wide threshold (2)').fill('10');
-    await page.getByLabel('Sold individually').check();
-    await page.getByRole('link', { name: 'Shipping' }).click();
+    await page.getByLabel('SKU', { exact: true }).fill('POL-ALT-ALG-1');
     await page.getByRole('link', { name: 'Linked Products' }).click();
     await page.locator('p').filter({ hasText: 'Upsells' }).getByPlaceholder('Search for a product…').click();
     await page.locator('p').filter({ hasText: 'Upsells' }).getByPlaceholder('Search for a product…').press('CapsLock');
@@ -41,12 +43,13 @@ test('CPN001', async ({ page }) => {
     await page.getByRole('option', { name: 'Polo (woo-polo)' }).click();
     await page.getByRole('link', { name: 'Attributes' }).click();
     await page.getByText('Add existing').click();
-    await page.getByRole('option', { name: 'Color' }).click();
+    await page.getByRole('option', { name: 'Size' }).click();
     await page.getByRole('link', { name: 'Advanced' }).click();
     await page.getByLabel('Purchase note').click();
     await page.getByLabel('Purchase note').fill('No hay reembolso, solo se cambiará el producto a uno nuevo');
     await page.getByLabel('Menu order').click();
     await page.getByLabel('Menu order').fill('5');
+    await page.getByLabel('Enable reviews').uncheck();
     await page.getByRole('link', { name: 'Get more options' }).click();
     await page.getByRole('link', { name: 'Pinterest' }).click();
     await page.getByLabel('Condition', { exact: true }).selectOption('new');
@@ -54,17 +57,18 @@ test('CPN001', async ({ page }) => {
     await page.getByRole('combobox').nth(4).fill('Clo');
     await page.getByRole('option', { name: 'Apparel & Accessories > Clothing', exact: true }).click();
     await page.frameLocator('#excerpt_ifr').getByRole('paragraph').click();
+    await page.frameLocator('#excerpt_ifr').locator('#tinymce').fill('Polo de algodón,buena calidad, duradera, fácil lavado');
     await page.getByRole('link', { name: 'Set product image' }).click();
-    await page.getByLabel('hoodie-with-logo-2.jpg').click();
+    await page.getByLabel('t-shirt-with-logo-1.jpg').click();
     await page.getByRole('button', { name: 'Set product image' }).click();
     await page.getByRole('link', { name: 'Add product gallery images' }).click();
-    await page.getByRole('checkbox', { name: 'hoodie-2.jpg' }).click();
+    await page.getByRole('checkbox', { name: 'tshirt-2.jpg' }).click();
     await page.getByRole('button', { name: 'Add to gallery' }).click();
     await page.getByRole('link', { name: 'Add product gallery images' }).click();
-    await page.getByRole('checkbox', { name: 'hoodie-with-pocket-2.jpg' }).click();
+    await page.getByRole('checkbox', { name: 'vnech-tee-blue-1.jpg' }).click();
     await page.getByRole('button', { name: 'Add to gallery' }).click();
     await page.getByRole('link', { name: 'Add product gallery images' }).click();
-    await page.getByRole('checkbox', { name: 'hoodie-blue-1.jpg' }).click();
+    await page.getByRole('checkbox', { name: 'polo-2.jpg' }).click();
     await page.getByRole('button', { name: 'Add to gallery' }).click();
     await page.getByRole('checkbox', { name: 'Clothing' }).check();
     await page.getByLabel('Add new tag').click();
@@ -73,11 +77,11 @@ test('CPN001', async ({ page }) => {
     await page.getByRole('button', { name: 'Add', exact: true }).click();
     await page.getByRole('button', { name: 'Edit date and time' }).click();
     await page.getByRole('link', { name: 'Edit', exact: true }).click();
-    await page.getByLabel('This is a featured product').check();
     await page.getByRole('button', { name: 'Publish', exact: true }).click();
     await page.getByRole('link', { name: 'https://francocardenas.me/' }).click();
+
     await page.waitForTimeout(3000);
-    await expect(page.getByRole('heading', { level: 1, name: 'Casaca' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Polo' })).toBeVisible();
 
     //? Delete Last Added From Dashboard
     await page.goto(`https://francocardenas.me/wp-admin/edit.php?post_type=product`);
