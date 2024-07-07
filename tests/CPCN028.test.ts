@@ -26,9 +26,6 @@ test('CPCN028', async ({ page }) => {
     await page.getByLabel('hoodie-with-logo-2.jpg').click();
     await page.getByRole('button', { name: 'Set product image' }).click();
     await page.getByRole('link', { name: 'Add product gallery images' }).click();
-    await page.getByText('book.pdf Deselect').click();
-    await page.getByRole('button', { name: 'Add to gallery' }).click();
-    await page.getByRole('link', { name: 'Add product gallery images' }).click();
     await page.getByLabel('CV').click();
     await page.getByRole('button', { name: 'Add to gallery' }).click();
     await page.getByRole('link', { name: 'Add product gallery images' }).click();
