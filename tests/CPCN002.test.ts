@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('CPCN004', async ({ page }) => {
+test('CPCN002', async ({ page }) => {
     test.setTimeout(120000);
 
     await page.goto('https://francocardenas.me/wp-login.php?redirect_to=https%3A%2F%2Ffrancocardenas.me%2Fwp-admin%2F&reauth=1');
