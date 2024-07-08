@@ -15,6 +15,7 @@ test('CPCN044', async ({ page }) => {
   await page.getByLabel('Product name').click();
   await page.getByLabel('Product name').fill('b');
   await page.getByRole('button', { name: 'Publish', exact: true }).click();
+  await page.waitForTimeout(5000);
   await expect(page.getByLabel('Product name')).toHaveValue('b');
   await page.getByLabel('Product name').click();
   await page.getByLabel('Product name').fill('a');
